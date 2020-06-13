@@ -5,7 +5,6 @@ import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 
 public class Post extends RealmObject {
-    @Required
     @PrimaryKey
     private int id;
     private String title;
