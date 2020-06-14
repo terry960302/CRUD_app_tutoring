@@ -3,16 +3,17 @@ package com.ritier.crud_tutoring.Dao;
 import com.ritier.crud_tutoring.Models.Post;
 
 import java.util.List;
+import java.util.function.Function;
 
 public interface PostDao {
 
     List<Post> getPosts();
 
-    Post getPost();
+    Post getPostById(int id);
 
-    void createPost();
+    void createPost(Post post);
 
-    void deletePost();
+    void deletePost(int id);
 
-    void updatePost();
+    void updatePost(Post post);
 }
