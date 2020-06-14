@@ -1,10 +1,7 @@
 package com.ritier.crud_tutoring.Dao;
 
 import android.util.Log;
-import android.widget.Toast;
-
 import com.ritier.crud_tutoring.Models.Post;
-
 import java.util.List;
 import io.realm.Realm;
 import io.realm.RealmQuery;

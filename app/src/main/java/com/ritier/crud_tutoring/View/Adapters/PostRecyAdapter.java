@@ -15,8 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ritier.crud_tutoring.Dao.PostDaoImpl;
 import com.ritier.crud_tutoring.Models.Post;
 import com.ritier.crud_tutoring.R;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class PostRecyAdapter extends RecyclerView.Adapter<PostRecyAdapter.PostRecyViewHolder> {
@@ -25,12 +23,14 @@ public class PostRecyAdapter extends RecyclerView.Adapter<PostRecyAdapter.PostRe
     public List<Post> posts;
     private PostDaoImpl postDao;
 
+    //생성자
     public PostRecyAdapter(Context context, List<Post> posts, PostDaoImpl postDao){
         this.context = context;
         this.posts = posts;
         this.postDao = postDao;
     }
 
+    //xml 파일의 id 요소를 가져올 수 있게 뷰 세팅
     @NonNull
     @Override
     public PostRecyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -38,6 +38,7 @@ public class PostRecyAdapter extends RecyclerView.Adapter<PostRecyAdapter.PostRe
         return new PostRecyViewHolder(view);
     }
 
+    //xml 파일 id요소를 자바 코드와 연동
     @Override
     public void onBindViewHolder(@NonNull PostRecyViewHolder holder, final int position) {
         holder.tvTitle.setText(posts.get(position).getTitle());
@@ -51,11 +52,13 @@ public class PostRecyAdapter extends RecyclerView.Adapter<PostRecyAdapter.PostRe
         });
     }
 
+    // recyclerview  아이템을 몇개를 보여줄 지 설정
     @Override
     public int getItemCount() {
         return posts.size();
     }
 
+    // 아이템 속 요소 설정
     public class PostRecyViewHolder extends RecyclerView.ViewHolder{
 
         TextView tvTitle;
@@ -69,11 +72,13 @@ public class PostRecyAdapter extends RecyclerView.Adapter<PostRecyAdapter.PostRe
         }
     }
 
+    // 총 아이템에서 아이템 하나 추가
     public void addItem(Post post){
         posts.add(post);
         notifyItemChanged(-1);
     }
 
+    // 아이템 클릭 시 팝업 창
     private void showDialog(final int position){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Post 삭제");

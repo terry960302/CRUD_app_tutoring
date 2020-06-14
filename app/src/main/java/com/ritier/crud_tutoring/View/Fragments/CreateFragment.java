@@ -36,6 +36,7 @@ public class CreateFragment extends Fragment {
         btnSubmit = view.findViewById(R.id.btn_submit);
         postDao = new PostDaoImpl(realm);
 
+        //디비에 데이터 추가
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
