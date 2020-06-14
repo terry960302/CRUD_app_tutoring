@@ -5,7 +5,7 @@ import com.ritier.crud_tutoring.Models.Post;
 import java.util.List;
 import java.util.function.Function;
 
-public interface PostDao {
+public interface PostDao { // Data Access Object
 
     List<Post> getPosts();
 
