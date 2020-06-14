@@ -1,6 +1,7 @@
 package com.ritier.crud_tutoring.Dao;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.ritier.crud_tutoring.Models.Post;
 
@@ -56,13 +57,17 @@ public class PostDaoImpl implements PostDao {
     }
 
     @Override
-    public void deletePost(int id) {
+    public void deletePost(final int id) {
         realm.beginTransaction();
+
         RealmQuery<Post> query = realm.where(Post.class);
         Post post = query.equalTo("id", id).findFirst();
-        if(post != null){
-            post.deleteFromRealm();
-        }
+
+       if(post != null){
+           post.deleteFromRealm();
+       }
+
+
         realm.commitTransaction();
 
         Log.d(tag, "deletePost success");

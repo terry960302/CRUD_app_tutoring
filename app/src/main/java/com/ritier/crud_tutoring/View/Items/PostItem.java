@@ -1,4 +1,4 @@
-package com.ritier.crud_tutoring.View;
+package com.ritier.crud_tutoring.View.Items;
 
 import android.widget.TextView;
 
