@@ -67,19 +67,18 @@ public class TeammateDaoImpl implements TeammateDao {
 
     @Override
     public void deleteTeammate(int id) {
-//        realm.beginTransaction();
-//
-//        RealmQuery<Post> query = realm.where(Post.class);
-//        Post post = query.equalTo("id", id).findFirst();
-//
-//        if(post != null){
-//            post.deleteFromRealm();
-//        }
-//
-//
-//        realm.commitTransaction();
-//
-//        Log.d(tag, "deletePost success");
+        realm.beginTransaction();
+
+        RealmQuery<Teammate> query = realm.where(Teammate.class);
+        Teammate teammate = query.equalTo("id", id).findFirst();
+
+        if(teammate != null){
+            teammate.deleteFromRealm();
+        }
+
+        realm.commitTransaction();
+
+        Log.d(tag, "deletePost success");
     }
 
     @Override
