@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                //프래그먼트 전환시 새로운 객체 생성 필요
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 switch (item.getItemId()){
                     case R.id.item_read:
