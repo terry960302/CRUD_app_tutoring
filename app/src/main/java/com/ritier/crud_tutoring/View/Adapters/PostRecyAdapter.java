@@ -43,7 +43,6 @@ public class PostRecyAdapter extends RecyclerView.Adapter<PostRecyAdapter.PostRe
     public void onBindViewHolder(@NonNull PostRecyViewHolder holder, final int position) {
         holder.tvTitle.setText(posts.get(position).getTitle());
         holder.tvDesc.setText(posts.get(position).getDesc());
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,12 +58,12 @@ public class PostRecyAdapter extends RecyclerView.Adapter<PostRecyAdapter.PostRe
     }
 
     // 아이템 속 요소 설정
-    public class PostRecyViewHolder extends RecyclerView.ViewHolder{
+    static class PostRecyViewHolder extends RecyclerView.ViewHolder{
 
         TextView tvTitle;
         TextView tvDesc;
 
-        public PostRecyViewHolder(@NonNull View itemView) {
+        PostRecyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvTitle = itemView.findViewById(R.id.tv_title);
@@ -87,6 +86,7 @@ public class PostRecyAdapter extends RecyclerView.Adapter<PostRecyAdapter.PostRe
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         postDao.deletePost(posts.get(position).getId());
+
                         posts.remove(position);
                         notifyDataSetChanged();
 
