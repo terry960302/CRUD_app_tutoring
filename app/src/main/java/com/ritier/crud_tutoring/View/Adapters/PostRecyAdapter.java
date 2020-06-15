@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.ritier.crud_tutoring.Dao.TeammateDaoImpl;
@@ -43,12 +45,22 @@ public class PostRecyAdapter extends RecyclerView.Adapter<PostRecyAdapter.PostRe
         holder.tvLeftRight.setText(item.getLeftRight());
         holder.tvAge.setText(item.getAge());
 
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showDialog(position);
-//            }
-//        });
+        //TODO : 클릭시 행동들
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "그냥 클릭", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(context, "길게 클릭", Toast.LENGTH_SHORT).show();
+
+                return false;
+            }
+        });
     }
 
     // recyclerview  아이템을 몇개를 보여줄 지 설정
