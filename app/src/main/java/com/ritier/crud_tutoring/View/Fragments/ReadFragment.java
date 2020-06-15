@@ -2,6 +2,7 @@ package com.ritier.crud_tutoring.View.Fragments;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.ritier.crud_tutoring.Dao.PostDaoImpl;
 import com.ritier.crud_tutoring.Dao.TeammateDaoImpl;
-import com.ritier.crud_tutoring.Models.Post;
 import com.ritier.crud_tutoring.Models.Teammate;
 import com.ritier.crud_tutoring.R;
 import com.ritier.crud_tutoring.Utils;
@@ -31,7 +30,6 @@ public class ReadFragment extends Fragment {
 
     private RecyclerView rvPosts;
     private PostRecyAdapter adapter;
-    private PostDaoImpl postDao;
     private TeammateDaoImpl teammateDao;
     private Realm realm = Realm.getDefaultInstance();
     private List<Teammate> teammates = new ArrayList<Teammate>();
@@ -89,19 +87,25 @@ public class ReadFragment extends Fragment {
         btnSubmit = view.findViewById(R.id.btn_submit);
 
         final AlertDialog dialog = builder.create();
+
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+                int id = Utils.getRealmLastId(realm);
                 String name = evName.getText().toString();
                 String backNumberStr = evNumber.getText().toString();
                 String age = evAge.getText().toString();
                 String leftRight = evLR.getText().toString();
 
-                Teammate teammateObj = new Teammate(Utils.getRealmLastId(realm), name, backNumberStr, leftRight, age);
+                Teammate teammateObj = new Teammate(id , name, backNumberStr, leftRight, age);
 
                 teammateDao.createTeammate(teammateObj);
 
                 Toast.makeText(getActivity(), "추가되었습니다.",Toast.LENGTH_LONG).show();
                 dialog.dismiss();
+
+                adapter.clearItems();
+                addTeammates2Adapter();
             }
         });
 
@@ -112,21 +116,15 @@ public class ReadFragment extends Fragment {
     //Put data to recyclerview
     private void addTeammates2Adapter() {
         adapter.teammates = new ArrayList<>(); // 데이터 초기화(창을 불러올 때마다 데이터 중복을 없애기 위함.)
-        for (int i = 0; i < getPostListFromRealm().size(); i++) {
-            Teammate teammate = getPostListFromRealm().get(i);
+        for (int i = 0; i < getTeammatesFromRealm().size(); i++) {
+            Teammate teammate = getTeammatesFromRealm().get(i);
             adapter.addItem(teammate);
         }
     }
 
     //Get data from realm(Local DB)
-    private List<Teammate> getPostListFromRealm() {
+    private List<Teammate> getTeammatesFromRealm() {
         teammates = teammateDao.getAllTeammates();
         return teammates;
-    }
-
-    @Override
-    public void onResume() {
-        adapter.notifyDataSetChanged();
-        super.onResume();
     }
 }

@@ -81,6 +81,11 @@ public class PostRecyAdapter extends RecyclerView.Adapter<PostRecyAdapter.PostRe
         notifyItemChanged(-1);
     }
 
+    public void clearItems(){
+        teammates.clear();
+        notifyDataSetChanged();
+    }
+
     // 아이템 클릭 시 팝업 창
 //    private void showDialog(final int position){
 //        AlertDialog.Builder builder = new AlertDialog.Builder(context);
