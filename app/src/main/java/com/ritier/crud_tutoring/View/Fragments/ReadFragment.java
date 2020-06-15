@@ -37,22 +37,24 @@ public class ReadFragment extends Fragment {
     private void initRecyclerView(View view){
         rvPosts = view.findViewById(R.id.rv_posts);
         rvPosts.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.VERTICAL, false));
-
         adapter = new PostRecyAdapter(this.getContext(), posts, postDao);
 
+        //Put data to recyclerview
         addPosts2Adapter();
 
         rvPosts.setAdapter(adapter);
     }
 
+    //Put data to recyclerview
     private void addPosts2Adapter(){
-        adapter.posts = new ArrayList<>();
+        adapter.posts = new ArrayList<>(); // 데이터 초기화(창을 불러올 때마다 데이터 중복을 없애기 위함.)
         for(int i = 0; i < getPostListFromRealm().size(); i++){
             Post post = getPostListFromRealm().get(i);
             adapter.addItem(post);
         }
     }
 
+    //Get data from realm(Local DB)
     private List<Post> getPostListFromRealm(){
         posts =  postDao.getPosts();
         return posts;
