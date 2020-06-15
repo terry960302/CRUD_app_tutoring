@@ -2,7 +2,6 @@ package com.ritier.crud_tutoring.Models;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
-import io.realm.annotations.Required;
 
 public class Post extends RealmObject {
     @PrimaryKey
